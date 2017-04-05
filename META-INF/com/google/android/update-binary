@@ -437,6 +437,10 @@ unified_mod_patch() {
   if [ -f $PATCHINSTALL$AUD_OUT_POL ] && [ -f $PATCHINSTALL$AUD_POL_CONF ]; then
     # REMOVE DEEP_BUFFER
     sed -i '/Speaker/{n;s/deep_buffer,//;}' $PATCH$AUD_POL_CONF
+  elif [ -f $PATCHINSTALL$AUD_POL_CONF ] && [ ! -f $PATCHINSTALL$AUD_POL ] && [ ! -f $PATCHINSTALL$AUD_OUT_POL ] && [ ! -f $PATCHINSTALL$V_AUD_POL ]; then
+	# REMOVE DEEP_BUFFER
+	sed -i 's/deep_buffer,//g' $PATCH$AUD_POL_CONF
+	sed -i 's/,deep_buffer//g' $PATCH$AUD_POL_CONF
   else
     for CFG in $AUD_POL $AUD_POL_CONF $AUD_OUT_POL $V_AUD_POL; do
       if [ -f $CFG ]; then
